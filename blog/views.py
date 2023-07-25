@@ -7,8 +7,8 @@ import django.middleware
 
 # Create your views here.
 
-from .models import Post
-from .serializers import PostSerializer
+from .models import Post, Category
+from .serializers import PostSerializer, CategorySerializer
 
 def get_csrf_token(request):
     token = django.middleware.csrf.get_token(request)
@@ -45,3 +45,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthorOrReadOnly]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+class CategoryShow(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
